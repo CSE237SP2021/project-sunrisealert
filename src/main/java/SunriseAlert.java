@@ -26,7 +26,18 @@ public class SunriseAlert {
 
             inputReader.close();
 
-            System.out.println(response.toString());
+            String json = response.toString();
+            //Begin parsing json
+            json = json.substring(json.indexOf("articles"));
+            
+            System.out.println(json);
+            String[] headlines = new String[20];
+            for (int i = 0; i < 20; i++) {
+                json = json.substring(json.indexOf("source") + 1);
+                headlines[i] = json.substring(json.indexOf("title") + 7, json.indexOf("description") - 2);
+                System.out.println(headlines[i]);
+            }
+
         }
 
     }
