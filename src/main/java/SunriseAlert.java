@@ -19,7 +19,7 @@ public class SunriseAlert {
                     new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
-            
+
             while ((inputLine = inputReader.readLine()) != null) {
                 response.append(inputLine);
             }
@@ -29,8 +29,7 @@ public class SunriseAlert {
             String json = response.toString();
             //Begin parsing json
             json = json.substring(json.indexOf("articles"));
-            
-            System.out.println(json);
+
             String[] headlines = new String[20];
             for (int i = 0; i < 20; i++) {
                 json = json.substring(json.indexOf("source") + 1);
@@ -39,6 +38,30 @@ public class SunriseAlert {
             }
 
         }
+        System.out.println(getWeather("63130"));
 
+    }
+
+    public static String getWeather(String location) throws Exception {
+        String url = "https://wttr.in/" + location + "?format=3";
+        URL urlObj = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
+        connection.setRequestMethod("GET");
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader inputReader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = inputReader.readLine()) != null) {
+                response.append(inputLine);
+            }
+
+            inputReader.close();
+            return response.toString();
+
+        }
+        return "Failed";
     }
 }
