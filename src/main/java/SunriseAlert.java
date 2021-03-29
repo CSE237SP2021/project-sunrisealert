@@ -16,8 +16,7 @@ public class SunriseAlert {
         if (args[0] == null) {
 
         } else {
-            //args[0] holds the location passed by the user
-            System.out.println(weather.getWeather("63130"));
+            System.out.println(weather.getWeather(args[0]));
         }
 
     }
