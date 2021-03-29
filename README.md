@@ -12,3 +12,8 @@ User stories for next iteration:
 Everything we've implemented currently works.
 
 Running Instructions: 
+1. type 'bash SunriseAlert.sh' into your terminal
+1. change directories into src/main/java
+1. to get top headlines and the weather (based on IP) run 'java SunriseAlert' 
+    1. to get weather for other locations type 'java SunriseAlert [zip code/city]'
+
