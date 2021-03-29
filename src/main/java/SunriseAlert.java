@@ -13,10 +13,10 @@ public class SunriseAlert {
         for (int i = 0; i < headlines.length; i++) {
             System.out.println(headlines[i]);
         }
-        if (args[0] == null) {
-
-        } else {
+        if (args.length == 1) {
             System.out.println(weather.getWeather(args[0]));
+        } else {
+            System.out.println(weather.getWeather(""));
         }
 
     }
