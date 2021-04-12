@@ -9,8 +9,19 @@ public class NewsApiClient {
 	private static final String QUERY = "top-headlines?country=us&apiKey=";
 	private static final String API_KEY = "2a7f891e21c64fe59f2114971a77e92d";
 
-	public static String[] getTopHeadlines() throws Exception {
-        String[] error = new String[1];
+	public static String[] parseHeadlines() throws Exception {
+		String jsonResponse = requestHeadlines();
+		jsonResponse = jsonResponse.substring(jsonResponse.indexOf("articles"));
+		String[] headlines = new String[20];
+		for (int i = 0; i < headlines.length; i++) {
+			jsonResponse = jsonResponse.substring(jsonResponse.indexOf("source") + 1);
+			headlines[i] = jsonResponse.substring(jsonResponse.indexOf("title") + 7, jsonResponse.indexOf("description") - 2);
+		}
+		return headlines;
+	}
+	
+	public static String requestHeadlines() throws Exception {
+        String error = new String();
         URL urlObj = new URL(BASE_URL + QUERY + API_KEY);
         HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
         connection.setRequestMethod("GET");
@@ -27,16 +38,7 @@ public class NewsApiClient {
 
             inputReader.close();
 
-            String json = response.toString();
-            //Begin parsing json
-            json = json.substring(json.indexOf("articles"));
-
-            String[] headlines = new String[20];
-            for (int i = 0; i < 20; i++) {
-                json = json.substring(json.indexOf("source") + 1);
-                headlines[i] = json.substring(json.indexOf("title") + 7, json.indexOf("description") - 2);
-            }
-            return headlines;
+            return response.toString();
         }
 
         return error;

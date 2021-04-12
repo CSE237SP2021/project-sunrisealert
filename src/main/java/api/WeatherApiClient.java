@@ -10,6 +10,7 @@ public class WeatherApiClient {
 
     public static String getWeather(String location) throws Exception{
         URL urlObj = new URL(BASE_URL + location + REQUEST_FORMAT);
+        System.out.println(urlObj);
         HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
         connection.setRequestMethod("GET");
         int responseCode = connection.getResponseCode();
@@ -24,6 +25,9 @@ public class WeatherApiClient {
             }
 
             inputReader.close();
+            System.out.println("----------------------");
+            System.out.println(response.toString());
+            System.out.println("----------------------");
             return response.toString();
 
         }
