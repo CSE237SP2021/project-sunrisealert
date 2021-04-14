@@ -26,6 +26,7 @@ Running Instructions:
 1. change directories into src/main/java
 1. to get top headlines and the weather (based on IP) run 'java SunriseAlert' 
     1. to get weather for other locations type 'java SunriseAlert [zip code/city]'
-1. to checkout the urls (and paste them in your browser) of articles, open 'links.txt'
+1. to view the urls (and paste them in your browser) of articles, open 'links.txt'
+1. to automatically open the urls in your default web browser, type 'bash OpenLinks.sh'
 
 
