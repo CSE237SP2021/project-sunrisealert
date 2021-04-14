@@ -25,7 +25,7 @@ User stories for next iteration:
 
 Everything we've implemented currently works
 
-Running Instructions: 
+### Running Instructions: 
 1. type 'bash SunriseAlerts.sh' into your terminal
-1. to view the urls (and paste them in your browser) of articles, open 'src/main/java/links.txt'
-1. to automatically open the urls in your default web browser, change directory to src/main/java and type 'bash OpenLinks.sh' in terminal
+1. to automatically open the urls in your default web browser type 'bash OpenLinks.sh' in terminal
+1. to view the urls, open src/main/java/links.txt
