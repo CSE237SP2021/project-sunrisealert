@@ -8,8 +8,8 @@ public class NewsApiClient {
     private static final String BASE_URL = "https://newsapi.org/v2/";
     private static final String QUERY = "top-headlines?country=us&apiKey=";
     private static final String API_KEY = "2a7f891e21c64fe59f2114971a77e92d";
-    private String[] headlines;
-    private String[] urls;
+    public String[] headlines;
+    public String[] urls;
 
     public String[] getHeadlines() throws Exception {
         if (this.headlines == null) {
