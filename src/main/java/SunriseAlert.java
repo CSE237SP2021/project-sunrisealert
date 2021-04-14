@@ -19,7 +19,7 @@ public class SunriseAlert {
         try {
             FileWriter writer = new FileWriter("links.txt");
             for (int i = 0; i < headlines.length; i++) {
-                writer.write(headlines[i] + ": " + urls[i] + "\n");
+                writer.write(urls[i] + "\n");
             }
             writer.close();
         } catch (IOException e) {
