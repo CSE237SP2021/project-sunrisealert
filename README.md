@@ -23,10 +23,5 @@ Everything we've implemented currently works
 
 Running Instructions: 
 1. type 'bash SunriseAlerts.sh' into your terminal
-1. change directories into src/main/java
-1. to get top headlines and the weather (based on IP) run 'java SunriseAlert' 
-    1. to get weather for other locations type 'java SunriseAlert [zip code/city]'
-1. to view the urls (and paste them in your browser) of articles, open 'links.txt'
-1. to automatically open the urls in your default web browser, type 'bash OpenLinks.sh'
-
-
+1. to view the urls (and paste them in your browser) of articles, open 'src/main/java/links.txt'
+1. to automatically open the urls in your default web browser, change directory to src/main/java and type 'bash OpenLinks.sh' in terminal
