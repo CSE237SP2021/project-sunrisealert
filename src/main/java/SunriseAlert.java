@@ -1,10 +1,14 @@
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.util.Scanner;
+
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import api.NewsApiClient;
 import api.WeatherApiClient;
 
@@ -33,9 +37,26 @@ public class SunriseAlert {
     	System.out.println("");
     	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
     	
-    	String articleNum = scanner.nextLine();
+    	int articleNum = Integer.parseInt(scanner.nextLine());
+    	if (articleNum >= 1 && articleNum <= urls.length + 1) {
+    		openLink(urls, articleNum);
+    	}
     	System.out.println(articleNum);
-    	
+    }
+    
+    public static boolean openLink(String[] urls, int articleNum) throws URISyntaxException {
+    	URI url = new URI(urls[articleNum + 1]);
+    	Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+    		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+    			try {
+    				desktop.browse(url);
+    	            return true;
+    			} catch (Exception e) {
+    	            e.printStackTrace();
+    	        }
+    	    }
+    		
+    	return false;
     }
 
     public static void main(String args[]) throws Exception {
