@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -11,7 +12,7 @@ public class SunriseAlert {
 
     public static void printHeadlines(String[] headlines) {
         for (int i = 0; i < headlines.length; i++) {
-            System.out.println(headlines[i]);
+            System.out.println("" + (i + 1) + ": " + headlines[i]);
         }
     }
 
@@ -26,6 +27,16 @@ public class SunriseAlert {
             System.out.println("Cannot open file for writing");
         }
     }
+    
+    public static void promptLinks(String[] urls) {
+    	Scanner scanner = new Scanner(System.in);
+    	System.out.println("");
+    	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
+    	
+    	String articleNum = scanner.nextLine();
+    	System.out.println(articleNum);
+    	
+    }
 
     public static void main(String args[]) throws Exception {
         NewsApiClient news = new NewsApiClient();
@@ -34,10 +45,13 @@ public class SunriseAlert {
         String[] urls = news.getUrls();
         printHeadlines(headlines);
         provideLinks(headlines, urls);
+        
         if (args.length == 1) {
             System.out.println(weather.getWeather(args[0]));
         } else {
             System.out.println(weather.getWeather(""));
         }
+        
+        promptLinks(urls);
     }
 }
