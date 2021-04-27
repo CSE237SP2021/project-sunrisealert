@@ -32,7 +32,7 @@ public class SunriseAlert {
         }
     }
     
-    public static void promptLinks(String[] urls) {
+    public static void promptLinks(String[] urls) throws URISyntaxException {
     	Scanner scanner = new Scanner(System.in);
     	System.out.println("");
     	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
@@ -41,7 +41,6 @@ public class SunriseAlert {
     	if (articleNum >= 1 && articleNum <= urls.length + 1) {
     		openLink(urls, articleNum);
     	}
-    	System.out.println(articleNum);
     }
     
     public static boolean openLink(String[] urls, int articleNum) throws URISyntaxException {
