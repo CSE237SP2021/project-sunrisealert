@@ -46,15 +46,17 @@ public class SunriseAlert {
     public static boolean openLink(String[] urls, int articleNum) throws URISyntaxException {
     	URI url = new URI(urls[articleNum + 1]);
     	Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+    	System.out.println(desktop);
     		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
     			try {
     				desktop.browse(url);
+    				System.out.println("true");
     	            return true;
     			} catch (Exception e) {
     	            e.printStackTrace();
     	        }
     	    }
-    		
+ 
     	return false;
     }
 
