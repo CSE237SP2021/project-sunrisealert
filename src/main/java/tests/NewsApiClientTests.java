@@ -17,14 +17,14 @@ class NewsApiClientTests {
 	
 	@Test
 	void testParseHeadlines() throws Exception {
-		// Test that user receives 20 stories
+		// Test that user receives 20 stories 
 		newsClient.parseResponse();
 		assertEquals(newsClient.headlines.length, 20);
 	}
 	
 	@Test
 	void testGetTopHeadlines() throws Exception {
-		// Test that response string isn't empty
+		// Test that response string isn't empty 
 		String headlineString = newsClient.requestHeadlines();
 		assertTrue(headlineString.contains("\"status\":\"ok\""));
 		assertFalse(headlineString.length() == 0);

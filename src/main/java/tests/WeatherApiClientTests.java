@@ -17,21 +17,21 @@ class WeatherApiClientTests {
 	
 	@Test
 	void testGetWeatherZipCode() throws Exception {
-		// Ensure that user can get weather with zip code
+		// Ensure that user can get weather with zip code 
 		String weatherString = weatherClient.getWeather("63130");
 		assertFalse(weatherString.length() == 0);
 	}
 	
 	@Test
 	void testGetWeatherCityName() throws Exception {
-		// Ensure that user can get weather with city name
+		// Ensure that user can get weather with city name 
 		String weatherString = weatherClient.getWeather("St. Louis");
 		assertFalse(weatherString.length() == 0);
 	}
 	
 	@Test
 	void testGetWeatherNoInput() throws Exception {
-		// Ensure that weather is retrieved using user's ip address if no location is input
+		// Ensure that weather is retrieved using user's ip address if no location is input 
 		String weatherString = weatherClient.getWeather("");
 		assertFalse(weatherString.length() == 0);
 	}
