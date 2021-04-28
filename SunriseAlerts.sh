@@ -8,7 +8,7 @@ if [[ -n "$user" ]]; then
     echo "Good morning $user"
 fi
 
-if [[ $results -lt 101 ]]; then
+if [[ $results -lt 101 && $results =~ ^[0-9]+$ ]]; then
     if [[ -n "$location" ]]; then
         java SunriseAlert $results $location
     else java SunriseAlert $results
