@@ -31,7 +31,8 @@ Completed user stories:
  - As a user, I want the option to automatically open links instead of running an additional script
  - As a user, I want Sunshine Alerts to have configurable settings so it opens and runs quickly
 
-Everything we have implemented works (within reason). Windows Subsystem for Linux (WSL) does not have native support for opening programs found on the main windows system. But if run through an IDE, even Windows users can have articles opened in their favorite browser. 
+Everything we have implemented works (within reason). The link opening functionality uses the java Desktop class and it's browse methods.  Unfortunately not every desktop environment supports these functions as they are apparently optimized for Windows, so the link opening functionality is not supported if running the program on Windows Subsystem for Linux (WSL).  If running the program on Windows or on an IDE such as Eclipse, then the user can type in the story number they want to read, and it will open the story's link in the user's default browser.
+
 
 
 ### Running Instructions: 
