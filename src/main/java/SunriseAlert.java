@@ -33,24 +33,44 @@ public class SunriseAlert {
     }
     
     public static void promptLinks(String[] urls) throws URISyntaxException {
-    	Scanner scanner = new Scanner(System.in);
-    	System.out.println("");
-    	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
-    	
-    	int articleNum = Integer.parseInt(scanner.nextLine());
-    	if (articleNum >= 1 && articleNum <= urls.length + 1) {
-    		openLink(urls, articleNum);
+    	if (Desktop.isDesktopSupported()) {
+        	System.out.println("");
+        	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
+        	parseUserInput(urls);
+    	}
+    	else {
+    		System.out.println("Desktop not supported");
     	}
     }
     
+    public static void parseUserInput(String[] urls) throws URISyntaxException {
+    	Scanner scanner = new Scanner(System.in);
+    	while (true) {
+        	String input = scanner.nextLine();
+        	if (input.equals("exit")) {
+        		break;
+        	}
+        	else {
+        		try {
+            		int articleNum = Integer.parseInt(input);
+                    if (articleNum >= 1 && articleNum <= urls.length) {
+                    	openLink(urls, articleNum);
+                	}
+        		}
+        		catch(Exception e) {
+        			System.out.println("Please enter a valid news story number");
+        		}
+        	}
+    	}
+    	scanner.close();
+    }
+    
     public static boolean openLink(String[] urls, int articleNum) throws URISyntaxException {
-    	URI url = new URI(urls[articleNum + 1]);
+    	URI url = new URI(urls[articleNum - 1]);
     	Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-    	System.out.println(desktop);
     		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
     			try {
     				desktop.browse(url);
-    				System.out.println("true");
     	            return true;
     			} catch (Exception e) {
     	            e.printStackTrace();
