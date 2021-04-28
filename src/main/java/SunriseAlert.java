@@ -12,9 +12,18 @@ import java.net.URISyntaxException;
 import api.NewsApiClient;
 import api.WeatherApiClient;
 
+/**
+ * The main class for the SunriseAlerts application.
+ * Handles user inputs, makes calls to API clients,
+ * and prints news and weather data to the console.
+ *
+ * @author Alex Eaton, Elijah Pena, Daniel Ruffing
+ */
+
 public class SunriseAlert {
 
     public static void printHeadlines(String[] headlines) {
+
     	System.out.println("");
     	System.out.println("------Your headlines for the day------");
  
@@ -23,40 +32,69 @@ public class SunriseAlert {
         }
     }
 
+    /**
+     * Writes headlines and urls to text file 'links.txt'.
+     *
+     * @param headlines  parsed headlines from NewsApiClient.
+     * @param urls  parsed urls from NewsApiClient.
+     */
     public static void provideLinks(String[] headlines, String[] urls) {
+
         try {
             FileWriter writer = new FileWriter("links.txt");
             for (int i = 0; i < headlines.length; i++) {
                 writer.write(urls[i] + "\n");
             }
+
             writer.close();
+
         } catch (IOException e) {
             System.out.println("Cannot open file for writing");
         }
     }
     
+    /**
+     * Lets the user open a selected article in their default web browser.
+     *
+     * @param urls  parsed urls from NewsApiClient.
+     */
     public static void promptLinks(String[] urls) throws URISyntaxException {
+
     	if (Desktop.isDesktopSupported()) {
         	System.out.println("");
         	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
+
         	parseUserInput(urls);
     	}
     	else {
     		System.out.println("");
-    		System.out.println("Your current desktop is not supported for link visiting (i.e. you are on Windows Subsytem for Linux).  For desktop link support, please run project on Windows or an IDE such as Eclipse");
-    	}
+    		System.out.print("Your current desktop is not supported for link visiting ");
+            System.out.println("(i.e. you are on Windows Subsytem for Linux). ");
+            System.out.println("For desktop link support, please run project on Windows or an IDE such as Eclipse.");
+        }
     }
     
+    /**
+     * Helper function for promptLinks. 
+     * <P>
+     * Let's the user select an article by typing a number.
+     * 
+     * @param urls  parsed urls from NewsApiClient.
+     */
     public static void parseUserInput(String[] urls) throws URISyntaxException {
+
     	Scanner scanner = new Scanner(System.in);
+
     	while (true) {
         	String input = scanner.nextLine();
+
         	if (input.equals("exit")) {
         		break;
         	}
         	else {
         		try {
             		int articleNum = Integer.parseInt(input);
+
                     if (articleNum >= 1 && articleNum <= urls.length) {
                     	openLink(urls, articleNum);
                 	}
@@ -69,12 +107,24 @@ public class SunriseAlert {
         		}
         	}
     	}
+
     	scanner.close();
     }
     
-    public static boolean openLink(String[] urls, int articleNum) throws URISyntaxException {
+    /**
+     * Helper function for promptLinks. 
+     * <P>
+     * Opens the selected link in the user's default web browser.
+     * 
+     * @param urls  parsed urls from NewsApiClient.
+     * @param articleNum  the article the user selected.
+     */
+    public static boolean openLink(String[] urls,
+                                   int articleNum) throws URISyntaxException {
+
     	URI url = new URI(urls[articleNum - 1]);
     	Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+
     		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
     			try {
     				desktop.browse(url);
@@ -88,13 +138,16 @@ public class SunriseAlert {
     }
 
     public static void main(String args[]) throws Exception {
+
         NewsApiClient news = new NewsApiClient();
         WeatherApiClient weather = new WeatherApiClient();
+
         String[] headlines = news.getHeadlines(args[0]);
         String[] urls = news.getUrls();
-        printHeadlines(headlines);
-        provideLinks(headlines, urls);
 
+        printHeadlines(headlines);
+
+        provideLinks(headlines, urls);
         
         if (args.length == 2) {
         	System.out.println("");
