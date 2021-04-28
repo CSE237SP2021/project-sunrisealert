@@ -43,7 +43,7 @@ public class SunriseAlert {
     	}
     	else {
     		System.out.println("");
-    		System.out.println("Your current desktop is not supported for link visiting (i.e. you are on Windows Subsytem for Linux. For desktop link support, please run project on Windows or an IDE such as Eclipse)");
+    		System.out.println("Your current desktop is not supported for link visiting (i.e. you are on Windows Subsytem for Linux).  For desktop link support, please run project on Windows or an IDE such as Eclipse");
     	}
     }
     
