@@ -6,7 +6,7 @@ if [[ "$os" == "windows" ]]; then
 	while read y 
 	do
 		start $y
-	done < src/main/javalinks.txt 
+	done < src/main/java/links.txt 
 
 elif [[ "$os" == "linux" ]]; then 
 	while read y 
