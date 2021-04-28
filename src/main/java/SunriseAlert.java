@@ -15,6 +15,9 @@ import api.WeatherApiClient;
 public class SunriseAlert {
 
     public static void printHeadlines(String[] headlines) {
+    	System.out.println("");
+    	System.out.println("------Your headlines for the day------");
+ 
         for (int i = 0; i < headlines.length; i++) {
             System.out.println("" + (i + 1) + ": " + headlines[i]);
         }
@@ -39,7 +42,7 @@ public class SunriseAlert {
         	parseUserInput(urls);
     	}
     	else {
-    		System.out.println("Desktop not supported");
+    		System.out.println("Your current desktop is not supported for link visiting (i.e. you are on Windows Subsytem for Linux. For desktop link support, please run project on Windows or an IDE such as Eclipse)");
     	}
     }
     
@@ -56,6 +59,9 @@ public class SunriseAlert {
                     if (articleNum >= 1 && articleNum <= urls.length) {
                     	openLink(urls, articleNum);
                 	}
+                    else {
+            			System.out.println("Please enter a valid news story number");
+                    }
         		}
         		catch(Exception e) {
         			System.out.println("Please enter a valid news story number");
@@ -89,8 +95,12 @@ public class SunriseAlert {
         provideLinks(headlines, urls);
         
         if (args.length == 1) {
+        	System.out.println("");
+        	System.out.println("------Today's Weather------");
             System.out.println(weather.getWeather(args[0]));
         } else {
+        	System.out.println("");
+        	System.out.println("------Today's Weather------");
             System.out.println(weather.getWeather(""));
         }
         
