@@ -90,15 +90,16 @@ public class SunriseAlert {
     public static void main(String args[]) throws Exception {
         NewsApiClient news = new NewsApiClient();
         WeatherApiClient weather = new WeatherApiClient();
-        String[] headlines = news.getHeadlines();
+        String[] headlines = news.getHeadlines(args[0]);
         String[] urls = news.getUrls();
         printHeadlines(headlines);
         provideLinks(headlines, urls);
+
         
-        if (args.length == 1) {
+        if (args.length == 2) {
         	System.out.println("");
         	System.out.println("------Today's Weather------");
-            System.out.println(weather.getWeather(args[0]));
+            System.out.println(weather.getWeather(args[1]));
         } else {
         	System.out.println("");
         	System.out.println("------Today's Weather------");
