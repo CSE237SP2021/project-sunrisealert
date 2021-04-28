@@ -21,7 +21,7 @@ public class NewsApiClient {
     private static final String API_KEY = "&apiKey=2a7f891e21c64fe59f2114971a77e92d";
 
     /** Specifies the number of headlines requested from the API */
-    private static String numHeadlines;
+    public static String numHeadlines;
 
     /** Stores the parsed headlines returned from the API. */
     public String[] headlines;

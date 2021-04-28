@@ -17,9 +17,10 @@ class NewsApiClientTests {
 	
 	@Test
 	void testParseHeadlines() throws Exception {
-		// Test that user receives 20 stories 
+		// Test that user receives specified number of stories
+		newsClient.numHeadlines = "30";
 		newsClient.parseResponse();
-		assertEquals(newsClient.headlines.length, 20);
+		assertEquals(newsClient.headlines.length, 30);
 	}
 	
 	@Test
