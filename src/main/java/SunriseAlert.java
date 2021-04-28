@@ -23,9 +23,9 @@ public class SunriseAlert {
 
     public static void printHeadlines(String[] headlines) {
 
-    	System.out.println("");
-    	System.out.println("------Your headlines for the day------");
- 
+        System.out.println("");
+        System.out.println("------Your headlines for the day------");
+
         for (int i = 0; i < headlines.length; i++) {
             System.out.println("" + (i + 1) + ": " + headlines[i]);
         }
@@ -51,7 +51,7 @@ public class SunriseAlert {
             System.out.println("Cannot open file for writing");
         }
     }
-    
+
     /**
      * Lets the user open a selected article in their default web browser.
      *
@@ -59,20 +59,20 @@ public class SunriseAlert {
      */
     public static void promptLinks(String[] urls) throws URISyntaxException {
 
-    	if (Desktop.isDesktopSupported()) {
-        	System.out.println("");
-        	System.out.println("Type number of desired story to visit, or type 'exit' to quit");
+        if (Desktop.isDesktopSupported()) {
+            System.out.println("");
+            System.out.println("Type number of desired story to visit, or type 'exit' to quit");
 
-        	parseUserInput(urls);
-    	}
-    	else {
-    		System.out.println("");
-    		System.out.print("Your current desktop is not supported for link visiting ");
+            parseUserInput(urls);
+        }
+        else {
+            System.out.println("");
+            System.out.print("Your current desktop is not supported for link visiting ");
             System.out.println("(i.e. you are on Windows Subsytem for Linux). ");
             System.out.println("For desktop link support, please run project on Windows or an IDE such as Eclipse.");
         }
     }
-    
+
     /**
      * Helper function for promptLinks. 
      * <P>
@@ -82,34 +82,34 @@ public class SunriseAlert {
      */
     public static void parseUserInput(String[] urls) throws URISyntaxException {
 
-    	Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-    	while (true) {
-        	String input = scanner.nextLine();
+        while (true) {
+            String input = scanner.nextLine();
 
-        	if (input.equals("exit")) {
-        		break;
-        	}
-        	else {
-        		try {
-            		int articleNum = Integer.parseInt(input);
+            if (input.equals("exit")) {
+                break;
+            }
+            else {
+                try {
+                    int articleNum = Integer.parseInt(input);
 
                     if (articleNum >= 1 && articleNum <= urls.length) {
-                    	openLink(urls, articleNum);
-                	}
-                    else {
-            			System.out.println("Please enter a valid news story number");
+                        openLink(urls, articleNum);
                     }
-        		}
-        		catch(Exception e) {
-        			System.out.println("Please enter a valid news story number");
-        		}
-        	}
-    	}
+                    else {
+                        System.out.println("Please enter a valid news story number");
+                    }
+                }
+                catch(Exception e) {
+                    System.out.println("Please enter a valid news story number");
+                }
+            }
+        }
 
-    	scanner.close();
+        scanner.close();
     }
-    
+
     /**
      * Helper function for promptLinks. 
      * <P>
@@ -119,45 +119,64 @@ public class SunriseAlert {
      * @param articleNum  the article the user selected.
      */
     public static boolean openLink(String[] urls,
-                                   int articleNum) throws URISyntaxException {
+            int articleNum) throws URISyntaxException {
 
-    	URI url = new URI(urls[articleNum - 1]);
-    	Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        URI url = new URI(urls[articleNum - 1]);
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 
-    		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-    			try {
-    				desktop.browse(url);
-    	            return true;
-    			} catch (Exception e) {
-    	            e.printStackTrace();
-    	        }
-    	    }
- 
-    	return false;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(url);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
     }
 
-    public static void main(String args[]) throws Exception {
+
+    /**
+     * Detects if run using config values.
+     * <P>
+     * If there are no values provided default values are used
+     *
+     * @param args arguments passed upon running SunriseAlerts from console
+     */
+    public static void runCompatible(String args[]) throws Exception {
 
         NewsApiClient news = new NewsApiClient();
         WeatherApiClient weather = new WeatherApiClient();
-
-        String[] headlines = news.getHeadlines(args[0]);
-        String[] urls = news.getUrls();
+        String[] headlines;
+        String[] urls;
+        if (args.length < 1) {
+            System.out.println("No arguments from config detected, running with default values");
+            headlines = news.getHeadlines("20");
+            urls = news.getUrls();
+        }
+        else {
+            headlines = news.getHeadlines(args[0]);
+            urls = news.getUrls();
+        }
 
         printHeadlines(headlines);
 
         provideLinks(headlines, urls);
-        
+
         if (args.length == 2) {
-        	System.out.println("");
-        	System.out.println("------Today's Weather------");
+            System.out.println("");
+            System.out.println("------Today's Weather------");
             System.out.println(weather.getWeather(args[1]));
         } else {
-        	System.out.println("");
-        	System.out.println("------Today's Weather------");
+            System.out.println("");
+            System.out.println("------Today's Weather------");
             System.out.println(weather.getWeather(""));
         }
-        
+
         promptLinks(urls);
+    }
+    public static void main(String args[]) throws Exception {
+        runCompatible(args);
     }
 }
