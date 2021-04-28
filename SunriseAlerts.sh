@@ -1,19 +1,17 @@
+source SunriseAlerts.config
 echo "Welcome to Sunrise Alerts!"
-
-echo "Please type your name [leave blank if undesired]"
-read name
-
-echo "Please type a city or area code for weather [IP by default]"
-read location
 
 cd src/main/java
 javac SunriseAlert.java
 
-if [[ -n "$name" ]]; then
-	echo "Good morning $name"
+if [[ -n "$user" ]]; then
+    echo "Good morning $user"
 fi
 
-if [[ -n "$location" ]]; then
-	java SunriseAlert $location
-else java SunriseAlert
+if [[ $results -lt 101 ]]; then
+    if [[ -n "$location" ]]; then
+        java SunriseAlert $results $location
+    else java SunriseAlert $results
+    fi
+else java SunriseAlert 20
 fi

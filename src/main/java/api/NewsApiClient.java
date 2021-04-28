@@ -6,12 +6,14 @@ import java.net.URL;
 
 public class NewsApiClient {
     private static final String BASE_URL = "https://newsapi.org/v2/";
-    private static final String QUERY = "top-headlines?country=us&apiKey=";
-    private static final String API_KEY = "2a7f891e21c64fe59f2114971a77e92d";
+    private static final String QUERY = "top-headlines?country=us&pageSize=";
+    private static final String API_KEY = "&apiKey=2a7f891e21c64fe59f2114971a77e92d";
+    private static String numHeadlines;
     public String[] headlines;
     public String[] urls;
 
-    public String[] getHeadlines() throws Exception {
+    public String[] getHeadlines(String numHeadlines) throws Exception {
+        this.numHeadlines = numHeadlines;
         if (this.headlines == null) {
             this.parseResponse();
         }
@@ -28,8 +30,8 @@ public class NewsApiClient {
     public void parseResponse() throws Exception {
         String jsonResponse = requestHeadlines();
         jsonResponse = jsonResponse.substring(jsonResponse.indexOf("articles"));
-        this.headlines = new String[20];
-        this.urls = new String[20];
+        this.headlines = new String[Integer.parseInt(numHeadlines)];
+        this.urls = new String[Integer.parseInt(numHeadlines)];
         for (int i = 0; i < headlines.length; i++) {
             jsonResponse = jsonResponse.substring(jsonResponse.indexOf("source") + 1);
             headlines[i] = jsonResponse.substring(jsonResponse.indexOf("title") + 7, jsonResponse.indexOf("description") - 2);
@@ -39,7 +41,7 @@ public class NewsApiClient {
 
     public static String requestHeadlines() throws Exception {
         String error = new String();
-        URL urlObj = new URL(BASE_URL + QUERY + API_KEY);
+        URL urlObj = new URL(BASE_URL + QUERY + numHeadlines + API_KEY);
         HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
         connection.setRequestMethod("GET");
         int responseCode = connection.getResponseCode();
