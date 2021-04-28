@@ -136,7 +136,15 @@ public class SunriseAlert {
         return false;
     }
 
-    public static void main(String args[]) throws Exception {
+
+    /**
+     * Detects if run using config values.
+     * <P>
+     * If there are no values provided default values are used
+     *
+     * @param args arguments passed upon running SunriseAlerts from console
+     */
+    public static void runCompatible(String args[]) throws Exception {
 
         NewsApiClient news = new NewsApiClient();
         WeatherApiClient weather = new WeatherApiClient();
@@ -167,5 +175,8 @@ public class SunriseAlert {
         }
 
         promptLinks(urls);
+    }
+    public static void main(String args[]) throws Exception {
+        runCompatible(args);
     }
 }
