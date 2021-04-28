@@ -21,11 +21,21 @@ Completed user stories:
 User stories for next iteration:
   - As a user, I want to customize the amount of articles that appear
   - As a user, I want to blacklist articles from certain urls
-  - As a user, I want the option to automatically open links instead of running an additional script 
+  - ~As a user, I want the option to automatically open links instead of running an additional script~ 
 
 Everything we've implemented currently works
 
+### Iteration 3
+Completed user stories:
+ - As a user, I want to customize the amount of articles that appear
+ - As a user, I want the option to automatically open links instead of running an additional script
+ - As a user, I want Sunshine Alerts to have configurable settings so it opens and runs quickly
+
+Everything we have implemented works (within reason). Windows Subsystem for Linux (WSL) does not have native support for opening programs found on the main windows system. But if run through an IDE, even Windows users can have articles opened in their favorite browser. 
+
+
 ### Running Instructions: 
 1. type 'bash SunriseAlerts.sh' into your terminal
-1. to automatically open the urls in your default web browser type 'bash OpenLinks.sh' in terminal
+1. to automatically open the urls in your default web browser type the number of the article when prompted (not for WSL)
 1. to view the urls, open src/main/java/links.txt
+1. to change your name, location, or the number of articles displayed change the corresponding fields in SunriseAlerts.config
