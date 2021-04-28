@@ -20,8 +20,8 @@ Completed user stories:
 
 User stories for next iteration:
   - As a user, I want to customize the amount of articles that appear
-  - As a user, I want to blacklist articles from certain urls
-  - ~As a user, I want the option to automatically open links instead of running an additional script~ 
+  - ~As a user, I want to blacklist articles from certain urls~ Not supported through the API
+  - As a user, I want the option to automatically open links instead of running an additional script 
 
 Everything we've implemented currently works
 
