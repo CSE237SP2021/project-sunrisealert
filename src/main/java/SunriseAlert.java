@@ -19,7 +19,6 @@ import api.WeatherApiClient;
  *
  * @author Alex Eaton, Elijah Pena, Daniel Ruffing
  */
-
 public class SunriseAlert {
 
     public static void printHeadlines(String[] headlines) {

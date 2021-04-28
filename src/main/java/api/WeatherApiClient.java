@@ -13,7 +13,6 @@ import java.net.URL;
  *
  * @author Alex Eaton, Elijah Pena, Daniel Ruffing
  */
-
 public class WeatherApiClient {
 
     /** For API calls. */

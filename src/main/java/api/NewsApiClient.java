@@ -13,7 +13,6 @@ import java.net.URL;
  *
  * @author Alex Eaton, Elijah Pena, Daniel Ruffing
  */
-
 public class NewsApiClient {
 
     /** For API calls. */
